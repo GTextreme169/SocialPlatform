@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SocialPlatform.Web</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="SocialPlatform.Web.styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>
+        var wsClient = new WebSocket("ws://localhost:25556");
+        console.log("WebSocket is created now.");
+        wsClient.onopen = function (event) {
+            console.log("WebSocket is open now.");
+            recordAudio();
+        };
+        var audioChunksRe = [];
+        var lasttime = 0;
+        wsClient.onmessage = function (event) {
+            audioChunksRe.push(event.data);
+            lasttime = Date.now();
+            var blob = new Blob(audioChunksRe, { type: 'audio/wav' });
+            
+            console.log("Received audio data from server: " + blob.size + " bytes.");
+            // play the audio
+            var url = URL.createObjectURL(blob);
+            var audio = new Audio(url);
+            audio.currentTime = Date.now() - lasttime;
+            audio.play();
+        };
+        
+        function recordAudio() {
+            console.log("Recording audio now.");
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    
+                    const mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.start(1000);
+                    mediaRecorder.ondataavailable = (event => {
+                        var audioChunks = [];
+                        audioChunks.push(event.data);
+                        // Send the audio data to the server
+                        var audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        wsClient.send(audioBlob);
+                    });
+                });
+        }
+    </script>
+</body>
+
+</html>

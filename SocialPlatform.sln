@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialPlatform", "SocialPlatform\SocialPlatform.csproj", "{542E4C1D-6C24-4493-964E-E91FB887EC04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialPlatform.Web", "SocialPlatform.Web\SocialPlatform.Web.csproj", "{6675CD42-4047-4B4B-8C6B-FD12220EBB25}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mumblent", "Mumblent\Mumblent.csproj", "{827E1C21-6C7F-44C0-93EB-27DB5AB29476}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{542E4C1D-6C24-4493-964E-E91FB887EC04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{542E4C1D-6C24-4493-964E-E91FB887EC04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{542E4C1D-6C24-4493-964E-E91FB887EC04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{542E4C1D-6C24-4493-964E-E91FB887EC04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6675CD42-4047-4B4B-8C6B-FD12220EBB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6675CD42-4047-4B4B-8C6B-FD12220EBB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6675CD42-4047-4B4B-8C6B-FD12220EBB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6675CD42-4047-4B4B-8C6B-FD12220EBB25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{827E1C21-6C7F-44C0-93EB-27DB5AB29476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827E1C21-6C7F-44C0-93EB-27DB5AB29476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{827E1C21-6C7F-44C0-93EB-27DB5AB29476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{827E1C21-6C7F-44C0-93EB-27DB5AB29476}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
