@@ -4,7 +4,8 @@
 
 <instance-profile id="w"
                  name="Wiki"
-                 start-page="starter-topic.md">
+                 start-page="Project-Structure.md">
 
-    <toc-element topic="starter-topic.md"/>
+    <toc-element topic="Project-Structure.md"/>
+    <toc-element topic="MVP.md"/>
 </instance-profile>
