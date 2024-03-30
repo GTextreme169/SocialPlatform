@@ -68,4 +68,8 @@
         <PackageReference Include="NAudio" Version="2.2.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\SocialPlatform.Client.Shared\SocialPlatform.Client.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

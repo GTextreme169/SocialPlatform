@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using SocialPlatform;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
@@ -9,11 +8,6 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 });
 
 // Add the example voice host
-var voiceHost = new ExampleVoiceHost();
-voiceHost.Host();
-
-builder.Services.AddSingleton(voiceHost);
-
 var app = builder.Build();
 
 var sampleTodos = new Todo[]

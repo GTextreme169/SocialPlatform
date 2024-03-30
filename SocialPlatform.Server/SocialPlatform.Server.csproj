@@ -7,12 +7,17 @@
         <InvariantGlobalization>true</InvariantGlobalization>
         <PublishAot>true</PublishAot>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <RootNamespace>SocialPlatform</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\SocialPlatform.Core\SocialPlatform.Core.csproj" />
     </ItemGroup>
 
 </Project>
