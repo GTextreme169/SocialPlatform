@@ -1,0 +1,23 @@
+<div class="ico-server @Class">
+    <div class="new-msg-ind">
+        <svg  viewBox="0 0 100 100">
+            <circle cx="0" cy="50" r="50" fill="@GetMessageIndColor()"/>
+        </svg>
+    </div>
+    <StatusIcon Style="flex-grow: 1; height: 100%;" MyStatus="StatusIcon.Status.None" NotificationCount="@NotificationCount"/>
+</div>
+
+@code {
+    [Parameter] public bool HasNewMessages { get; set; } = true;
+    [Parameter] public string Class { get; set; } = "";
+    [Parameter] public int? NotificationCount { get; set; } = null;
+
+    public string GetMessageIndColor()
+    {
+        return HasNewMessages switch
+        {
+            true => "white",
+            false => "transparent"
+        };
+    }
+}

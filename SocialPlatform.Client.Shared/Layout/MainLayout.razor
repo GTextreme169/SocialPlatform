@@ -1,16 +1,30 @@
-﻿@inherits LayoutComponentBase
+﻿@using SocialPlatform.Client.Shared.Components
+@inherits LayoutComponentBase
 <div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
-
+    <!-- The main layout consists of two left hand side bars, a right hand sidebar, and a main content in the center. -->
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        <div class="main-left-bar">
+            <div class="server-list">
+                <ServerIcon HasNewMessages="false"/>
+                <ServerIcon NotificationCount="5"/>
+                <ServerIcon HasNewMessages="false"/>
+            </div>
+            <div class="channel-list">
+                
+            </div>
         </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
+        <div class="main-content">
+            <div class="top-bar">
+                
+            </div>
+            <div class="row-container">
+                <div class="content">
+                </div>
+                <div class="member-list">
+                    
+                </div>
+            </div>
+        </div>
+        
     </main>
 </div>

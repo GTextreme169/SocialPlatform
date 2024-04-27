@@ -16,6 +16,7 @@
       <AdditionalFiles Include="Pages\Counter.razor" />
       <AdditionalFiles Include="Pages\Home.razor" />
       <AdditionalFiles Include="Pages\Weather.razor" />
+        <AdditionalFiles Include="Components\StatusIcon.razor" />
     </ItemGroup>
 
     <ItemGroup>
@@ -30,6 +31,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\icon-192.png" />
       <_ContentIncludedByDefault Remove="wwwroot\index.html" />
       <_ContentIncludedByDefault Remove="wwwroot\sample-data\weather.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\img\" />
     </ItemGroup>
 
 </Project>

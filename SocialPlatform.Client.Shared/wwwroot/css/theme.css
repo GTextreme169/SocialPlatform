@@ -1,0 +1,10 @@
+:root {
+    --theme-primary: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    --theme-secondary: #6c757d;
+    --theme-success: #28a745;
+    --theme-info: #17a2b8;
+    --theme-warning: #ffc107;
+    --theme-danger: #dc3545;
+    --theme-light: #f8f9fa;
+    --theme-dark: #343a40;
+}
