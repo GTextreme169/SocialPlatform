@@ -1,6 +1,7 @@
 :root {
-    --theme-primary: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-    --theme-secondary: #6c757d;
+    --theme-primary: #313338;
+    --theme-secondary: #2b2d31;
+    --theme-tertiary: #1e1f22;
     --theme-success: #28a745;
     --theme-info: #17a2b8;
     --theme-warning: #ffc107;

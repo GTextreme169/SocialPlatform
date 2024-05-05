@@ -1,0 +1,26 @@
+div {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+}
+
+#status-text {
+    display: flex;
+    flex-direction: column;
+}
+
+#status-text span {
+    margin-left: 5px;
+    flex-grow: 1;
+    vertical-align: middle;
+}
+
+#user-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#user-status {
+    font-size: 12px;
+    color: gray;
+}
