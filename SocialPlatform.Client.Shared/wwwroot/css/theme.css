@@ -1,7 +1,8 @@
 :root {
-    --theme-primary: #313338;
-    --theme-secondary: #2b2d31;
-    --theme-tertiary: #1e1f22;
+    --theme-background-primary: #313338;
+    --theme-background-secondary: #2b2d31;
+    --theme-background-tertiary: #1e1f22;
+    --theme-foreground-primary: #80848E;
     --theme-success: #28a745;
     --theme-info: #17a2b8;
     --theme-warning: #ffc107;

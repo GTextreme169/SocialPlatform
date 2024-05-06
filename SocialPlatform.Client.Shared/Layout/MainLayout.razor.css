@@ -11,7 +11,7 @@ main {
 }
 
 .server-list {
-    background-color: var(--theme-tertiary);
+    background-color: var(--theme-background-tertiary);
     width: 75px;
     height: max(100vh,max-content);
     display: flex;
@@ -26,7 +26,7 @@ main {
 }
 
 .channel-list {
-    background-color: var(--theme-secondary);
+    background-color: var(--theme-background-secondary);
     width: max-content;
     height: 100vh;
     min-width: 150px;
@@ -35,7 +35,7 @@ main {
 }
 
 .main-content {
-    background-color: var(--theme-primary);
+    background-color: var(--theme-background-primary);
     width: 80%;
     height: 100vh;
     display: flex;
@@ -43,12 +43,12 @@ main {
 }
 
 .top-bar {
-    background-color: var(--theme-primary);
+    background-color: var(--theme-background-primary);
     height: 50px;
     width: 100%;
     border-bottom-style: solid;
     border-bottom-width: 1px;
-    border-bottom-color: var(--theme-tertiary);
+    border-bottom-color: var(--theme-background-tertiary);
 }
 
 .row-container {
@@ -66,7 +66,7 @@ main {
 }
 
 .member-list {
-    background-color: var(--theme-secondary);
+    background-color: var(--theme-background-secondary);
     width: 20%;
     height: 100%;
     min-width: 100px;

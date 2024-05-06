@@ -1,0 +1,96 @@
+@using SocialPlatform.Client.Shared.Components
+<div id="channel-list">
+    <select id="server-menu" class="text-medium">
+        <option>foo</option>
+        <option>bar</option>
+        <option>fubar</option>
+    </select>
+    <div id="content">
+        @foreach (var channel in TopLevelChannels)
+        {
+            <div class="channel" >
+                <img class="icon-small" src="@GetChannelIconUrl(channel)" alt="Channel Icon"/>
+                <span>@channel.Name</span>
+            </div>
+            @if (channel.SubChannels != null)
+            {
+                <div class="sub-channels">
+                    @foreach (var subChannel in channel.SubChannels)
+                    {
+                        <div class="channel">
+                            <img class="icon-small" src="@GetChannelIconUrl(subChannel)" alt="Channel Icon"/>
+                            <span>@subChannel.Name</span>
+                        </div>
+                    }
+                </div>
+            }
+        }
+    </div>
+    <div id="voice-controls">
+        <UserStatus/>
+        <button type="button">
+            <img src="_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Microphone.svg" alt="Microphone Icon" class="icon-small"/>
+        </button>
+        <button type="button">
+            <img src="_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Headphones.svg" alt="Headphone Icon" class="icon-small"/>
+        </button>
+        <button type="button">
+            <img src="_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Gear.svg" alt="Settings Icon" class="icon-small"/>
+        </button>
+    </div>
+</div>
+
+@code {
+
+    public class Channel
+    {
+        public enum ChannelType
+        {
+            Text,
+            Voice
+        }
+        public string Name { get; set; } = String.Empty;
+        public ChannelType Type { get; set; } = ChannelType.Text;
+        public List<Channel>? SubChannels { get; set; } = null;
+        public bool Active { get; set; } = false;
+    }
+
+    public List<Channel> TopLevelChannels { get; set; } = new List<Channel>
+    {
+        new Channel
+        {
+            Name = "General",
+            Type = Channel.ChannelType.Text,
+            Active = true
+        },
+        new Channel
+        {
+            Name = "Voice Channels",
+            Type = Channel.ChannelType.Voice,
+            SubChannels = new List<Channel>
+            {
+                new Channel
+                {
+                    Name = "General",
+                    Type = Channel.ChannelType.Voice
+                },
+                new Channel
+                {
+                    Name = "AFK",
+                    Type = Channel.ChannelType.Voice
+                }
+            }
+        }
+    };
+    
+    public string GetChannelIconUrl(Channel channel)
+    {
+        return channel.Type switch
+        {
+            Channel.ChannelType.Text => "_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Hash.svg" ,
+            Channel.ChannelType.Voice => "_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Speaker.svg" ,
+            _ => "_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Plus.svg"
+        };
+    }
+}
+
