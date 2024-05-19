@@ -18,6 +18,15 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SocialPlatform.Core\SocialPlatform.Core.csproj" />
+      <ProjectReference Include="..\SocialPlatform.Server.Data\SocialPlatform.Server.Data.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BIAB.WebAPI" Version="0.3.2-beta" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers\" />
     </ItemGroup>
 
 </Project>
