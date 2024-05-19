@@ -1,0 +1,52 @@
+<div class="top-bar @Class" id="@Id" style="@Style">
+    <img id="channel-type-ico" class="icon" src="@GetContextIconUrl()" alt="Context Icon"/>
+    <label id="context">@Context</label>
+    <hr class="line"/>
+    @if (CurrentMode == Mode.Channel)
+    {
+        <label class="spacer">@Description</label>
+        <button type="button">  
+            <img src="_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Plus.svg" alt="Add Icon" class="icon"/>
+        </button>
+        <button type="button">
+            <img src="_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Person.svg" alt="Friend Icon" class="icon"/>
+        </button>
+        <button type="button">
+            <img src="_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Gear.svg" alt="Settings Icon" class="icon"/>
+        </button>
+        <button type="button">
+            <img src="_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Exit.svg" alt="Exit Icon" class="icon"/>
+        </button>
+    }
+    else
+    {
+    }
+    
+</div>
+
+@code {
+    // Generic Parameters
+    [Parameter] public string Class { get; set; } = "";
+    [Parameter] public string Id { get; set; } = "";
+    [Parameter] public string Style { get; set; } = "";
+    
+    // Control specific parameters
+    public enum Mode { Channel, User }
+    public enum ContextIcon { Text, Voice, Custom }
+    [Parameter] public Mode CurrentMode { get; set; } = Mode.Channel;
+    [Parameter] public string Context { get; set; } = "";
+    [Parameter] public ContextIcon ContextIconType { get; set; } = ContextIcon.Text;
+    [Parameter] public string CustomIconUrl { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+    
+    private string GetContextIconUrl()
+    {
+        return ContextIconType switch
+        {
+            ContextIcon.Text => "_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Hash.svg",
+            ContextIcon.Voice => "_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Speaker.svg",
+            ContextIcon.Custom => CustomIconUrl,
+            _ => "_content/SocialPlatform.Client.Shared/img/SocialPlatform_icons/Plus.svg"
+        };
+    }
+}

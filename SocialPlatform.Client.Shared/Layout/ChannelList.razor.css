@@ -27,6 +27,16 @@ button:hover {
     color: var(--theme-foreground-primary);
 }
 
+#server-menu select
+{
+    display: none; /* Hide the default dropdown */
+}
+
+#server-menu option
+{
+    background-color: var(--theme-background-secondary);
+}
+
 .channel {
     display: flex;
     flex-direction: row;
