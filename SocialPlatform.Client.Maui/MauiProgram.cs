@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Mumblent;
+namespace SocialPlatform.Client.Maui;
 
 public static class MauiProgram
 {

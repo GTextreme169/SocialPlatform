@@ -5,7 +5,7 @@ using MumbleSharp.Audio;
 using MumbleSharp.Audio.Codecs;
 using MumbleSharp.Model;
 
-namespace Mumblent;
+namespace SocialPlatform.Client.Maui;
 
 public class ConnectionMumbleProtocol : BasicMumbleProtocol
     {

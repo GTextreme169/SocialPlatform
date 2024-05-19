@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Mumblent;
+namespace SocialPlatform.Client.Maui;
 
 [Application]
 public class MainApplication : MauiApplication

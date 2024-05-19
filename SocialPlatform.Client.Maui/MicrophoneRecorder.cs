@@ -1,7 +1,7 @@
 ﻿using MumbleSharp;
 using NAudio.Wave;
 
-namespace Mumblent;
+namespace SocialPlatform.Client.Maui;
 
 public class MicrophoneRecorder
 {

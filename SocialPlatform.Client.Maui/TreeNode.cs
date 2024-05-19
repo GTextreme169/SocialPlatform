@@ -1,4 +1,4 @@
-﻿namespace Mumblent;
+﻿namespace SocialPlatform.Client.Maui;
 
 public class TreeNode<T> : TreeNode
 {

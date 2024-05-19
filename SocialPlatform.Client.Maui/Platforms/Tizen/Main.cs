@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace Mumblent;
+namespace SocialPlatform.Client.Maui;
 
 class Program : MauiApplication
 {

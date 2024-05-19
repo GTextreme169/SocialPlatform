@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor" >
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
@@ -8,6 +8,18 @@
 
     <ItemGroup>
       <ProjectReference Include="..\SocialPlatform.Core\SocialPlatform.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Layout\MainLayout.razor" />
+      <AdditionalFiles Include="Layout\NavMenu.razor" />
+      <AdditionalFiles Include="Pages\Counter.razor" />
+      <AdditionalFiles Include="Pages\Home.razor" />
+      <AdditionalFiles Include="Pages\Weather.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
     </ItemGroup>
 
 </Project>

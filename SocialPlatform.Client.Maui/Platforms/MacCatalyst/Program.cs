@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Mumblent;
+namespace SocialPlatform.Client.Maui;
 
 public class Program
 {

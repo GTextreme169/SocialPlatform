@@ -1,4 +1,4 @@
-﻿namespace Mumblent;
+﻿namespace SocialPlatform.Client.Maui;
 
 public partial class MainPage : ContentPage
 {

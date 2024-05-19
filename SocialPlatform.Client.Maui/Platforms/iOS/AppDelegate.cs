@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Mumblent;
+namespace SocialPlatform.Client.Maui;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate
