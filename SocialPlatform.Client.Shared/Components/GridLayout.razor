@@ -1,0 +1,54 @@
+@using System.Text
+<!-- Creates a grid layout for the application -->
+<!-- 
+Usage:
+    <GridLayout>
+        <GridItem Row="0" Column="0" ColumnSpan="8">
+            <h1>Header</h1>
+        </GridItem>
+        <GridItem Row="1" Column="0" ColumnSpan="2">
+            <h2>Subheader</h2>
+        </GridItem>
+        <GridItem Row="1" Column="2" ColumnSpan="6">
+            <p>Description</p>
+        </GridItem>
+        <GridItem Row="2" Column="0" ColumnSpan="8" RowSpan="2">
+            <p>Content</p>
+        </GridItem>
+    </GridLayout>
+    * Note: Column and Row values are zero-based and default to 0
+    * Note: ColumnSpan and RowSpan values are one-based and default to 1
+    
+    Displays:
+    +--------------------------------+
+    | Header                         |
+    +-----------------+--------------+
+    | Subheader       | Description  |
+    +-----------------+--------------+
+    | Content                        |
+    |                                |
+    +--------------------------------+
+-->
+
+<div class="grid-layout @Class" id="@Id" style="@GeneratedStyle() @Style">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; } = null;
+    [Parameter] public string Class { get; set; } = string.Empty;
+    [Parameter] public string Id { get; set; } = string.Empty;
+    [Parameter] public string Style { get; set; } = string.Empty;
+    [Parameter] public string ColumnSpacing { get; set; } = "0";
+    [Parameter] public string RowSpacing { get; set; } = "0";
+    [Parameter] public bool Inline { get; set; } = false;
+    
+    private string GeneratedStyle()
+    {
+        return new StringBuilder()
+            .Append(Inline ? "display: inline-grid;" : "display: grid;")
+            .Append($"grid-column-gap: {ColumnSpacing};")
+            .Append($"grid-row-gap: {RowSpacing};")
+            .ToString();
+    }
+}

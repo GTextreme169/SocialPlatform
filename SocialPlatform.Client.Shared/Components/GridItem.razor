@@ -1,0 +1,37 @@
+@using System.Text
+<!-- Used in conjunction with GridLayout -->
+<!--
+Using:
+    <GridLayout ... >
+        ...
+        <GridItem Row="4" Column="5" ColumnSpan="2" RowSpan="4' >
+            <p>Content</p>
+            <p>More Content</p>
+            ...
+        </GridItem>
+        ...
+    </GridLayout>
+-->
+
+<div class="grid-item @Class" id="@Id" style="@GeneratedStyle() @Style">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; } = null;
+    [Parameter] public string Class { get; set; } = string.Empty;
+    [Parameter] public string Id { get; set; } = string.Empty;
+    [Parameter] public string Style { get; set; } = string.Empty;
+    [Parameter] public int Row { get; set; } = 0;
+    [Parameter] public int Column { get; set; } = 0;
+    [Parameter] public int RowSpan { get; set; } = 1;
+    [Parameter] public int ColumnSpan { get; set; } = 1;
+    
+    private string GeneratedStyle()
+    {
+        return new StringBuilder()
+            .Append($"grid-row-start: {Row + 1} / span {RowSpan};")
+            .Append($"grid-column: {Column + 1} / span {ColumnSpan};")
+            .ToString();
+    }
+}

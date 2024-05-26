@@ -1,0 +1,21 @@
+<!-- Used to create a vertical layout for the application -->
+<!--
+Usage:
+    <VerticalLayout Class="my-class" Id="my-id" Style="my-style">
+        <p>Content</p>
+    </VerticalLayout>
+-->
+
+<div class="vlay @Class" id="@Id" style="@Style">
+    @ChildContent
+</div>
+
+@code { 
+    [Parameter]
+    public string Class { get; set; } = "";
+    [Parameter]
+    public string Id { get; set; } = "";
+    [Parameter]
+    public string Style { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; } = null;
+}

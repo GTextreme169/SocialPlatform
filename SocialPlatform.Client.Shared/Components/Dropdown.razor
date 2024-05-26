@@ -1,7 +1,28 @@
-<div>
-    
+<div class="dropdown @Class" id="@Id" style="@Style">
+    <button @onclick="ToggleDropdown" class="dropbtn">
+        <HorizontalLayout>
+            <span>@ButtonText</span>
+            <span class="material-icons">arrow_drop_down</span>
+        </HorizontalLayout>
+    </button>
+    <div id="myDropdown" class="dropdown-content">
+        @ChildContent
+    </div>
 </div>
 
 @code {
+    [Parameter] public string Class { get; set; } = string.Empty;
+    [Parameter] public string Id { get; set; } = string.Empty;
+    [Parameter] public string Style { get; set; } = string.Empty;
+    [Parameter] public string ButtonText { get; set; } = string.Empty;
+    [Parameter] public RenderFragment? ChildContent { get; set; } = null;
+    [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
+    [Parameter] public string IconSize { get; set; } = "24px";
+    public bool IsOpen { get; private set; } = false;
     
+    private void ToggleDropdown()
+    {
+        IsOpen = !IsOpen;
+        IsOpenChanged.InvokeAsync(IsOpen);
+    }
 }
