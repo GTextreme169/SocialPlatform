@@ -1,0 +1,21 @@
+<!-- Used to create a horizontal layout for the application -->
+<!--
+Usage:
+    <HorizontalLayout Class="my-class" Id="my-id" Style="my-style">
+        <p>Content</p>
+    </HorizontalLayout>
+-->
+
+<div class="hlay @Class" id="@Id" style="@Style">
+    @ChildContent
+</div>
+
+@code {
+    [Parameter]
+    public string Class { get; set; } = "";
+    [Parameter]
+    public string Id { get; set; } = "";
+    [Parameter]
+    public string Style { get; set; } = "";
+    [Parameter] public RenderFragment? ChildContent { get; set; } = null;
+}

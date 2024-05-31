@@ -1,0 +1,14 @@
+@using System.Drawing
+<div>
+    <StatusIcon/>
+    <div id="status-text">
+        <span id="user-name" style="color: @Color;">@UserName</span>
+        <span id="user-status">@StatusMessage</span>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Color { get; set; } = "blue";
+    [Parameter] public string UserName { get; set; } = "Username";
+    [Parameter] public string? StatusMessage { get; set; } = null;
+}

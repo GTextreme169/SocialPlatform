@@ -1,0 +1,12 @@
+:root {
+    --theme-background-primary: #313338;
+    --theme-background-secondary: #2b2d31;
+    --theme-background-tertiary: #1e1f22;
+    --theme-foreground-primary: #80848E;
+    --theme-success: #28a745;
+    --theme-info: #17a2b8;
+    --theme-warning: #ffc107;
+    --theme-danger: #dc3545;
+    --theme-light: #f8f9fa;
+    --theme-dark: #343a40;
+}

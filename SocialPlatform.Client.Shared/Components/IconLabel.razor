@@ -1,0 +1,13 @@
+<div style="@Style" id="@Id" class="@Class">
+    <img src="@Source" alt="@AltText"/>
+    <span>@Text</span>
+</div>
+
+@code {
+    [Parameter] public string? Source { get; set; }
+    [Parameter] public string? AltText { get; set; }
+    [Parameter] public string Text { get; set; } = string.Empty;
+    [Parameter] public string Id { get; set; } = string.Empty;
+    [Parameter] public string Class { get; set; } = string.Empty;
+    [Parameter] public string Style { get; set; } = string.Empty;
+}

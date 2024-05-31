@@ -1,0 +1,74 @@
+<HorizontalLayout Id="message-layout">
+    <VerticalLayout Style="margin-left: 10px; height: 100%;">
+        <!-- User Icon - width 50px and height 50px and shifted to the top -->
+        <img id="user-icon" src="https://via.placeholder.com/50" alt="User Avatar" class="avatar"/>
+        <span class="spacer"> </span>
+    </VerticalLayout>
+    <VerticalLayout Style="flex-grow: 1; height: min-content; padding-left: 10px; padding-right: 10px;">
+        <HorizontalLayout Id="message-header">
+            <!-- User Name -->
+            <h3>User Name</h3>
+            <!-- Post date and time -->
+            <p class="time-text">Yesterday at 5:42pm</p>
+        </HorizontalLayout>
+        <!-- Images (if any) -->
+        @if (Images is { Length: > 0 })
+        {
+            
+            @foreach (var image in Images)
+            {
+                <img src="@image" alt="attached image" class="image-preview"/>
+            }
+        }
+        <!-- Message -->
+        <p class="message-text">@Text</p>
+        
+        <!-- Attachments (if any) -->
+        @if (Attachments is { Length: > 0 })
+        {
+            @foreach (var attachment in Attachments)
+            {
+                <a href="@attachment" target="_blank">@attachment</a>
+            }
+        }
+        <!-- Reactions (if any) -->
+        <HorizontalLayout>
+            @if (Reactions is { Length: > 0 })
+            {
+                @foreach (var reaction in Reactions)
+                {
+                    <button class="reaction-icon">@reaction</button>
+                }
+                <span class="spacer">   </span>
+            }
+        </HorizontalLayout>
+        
+    </VerticalLayout>
+</HorizontalLayout>
+
+@code {
+    [Parameter] public string Id { get; set; } = String.Empty;
+    
+    public string[]? Images { get; set; } = new string[]
+    {
+        "https://via.placeholder.com/150",
+        "https://via.placeholder.com/150",
+        "https://via.placeholder.com/150"
+    };
+    public string? Text { get; set; } = "Message content";
+    
+    public string[]? Attachments { get; set; } = new string[]
+    {
+        "https://via.placeholder.com/150",
+        "https://via.placeholder.com/150",
+        "https://via.placeholder.com/150"
+    };
+    
+    public string[]? Reactions { get; set; } = new string[]
+    {
+        "👍",
+        "👎",
+        "❤️",
+        "😂"
+    };
+}

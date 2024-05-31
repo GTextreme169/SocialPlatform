@@ -1,0 +1,59 @@
+#message-layout{}
+
+#user-icon-container{
+    width: 50px;
+    height: 100%;
+}
+
+.spacer{
+    flex-grow: 1;
+}
+
+#user-icon{
+    width: 50px;
+    height: 50px;
+}
+
+#content-layout{
+    flex-grow: 1;
+    height: min-content;
+}
+
+.image-preview
+{
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+.reaction-icon{
+    width: 40px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: var(--theme-background-tertiary);
+}
+
+.reaction-icon:hover{
+    background-color: var(--theme-background-secondary);
+}
+
+.message-text
+{
+    color: var(--theme-light);
+    font-size: 18px;
+}
+
+h3{
+    color: var(--theme-light);
+    font-size: 24px;
+}
+
+.time-text
+{
+    color: lightgray;
+    font-size: 10px;
+}
+

@@ -1,0 +1,34 @@
+.icon-small {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-medium {
+    width: 48px;
+    height: 48px;
+}
+
+.icon-large {
+    width: 96px;
+    height: 96px;
+}
+
+.text-xxsmall {
+    font-size: 8px;
+}
+
+.text-xsmall {
+    font-size: 10px;
+}
+
+.text-small {
+    font-size: 12px;
+}
+
+.text-medium {
+    font-size: 24px;
+}
+
+.text-large {
+    font-size: 48px;
+}
