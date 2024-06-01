@@ -32,3 +32,20 @@
 .text-large {
     font-size: 48px;
 }
+
+
+.top-bar {
+    background-color: var(--theme-background-primary);
+    height: 50px;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--theme-background-tertiary);
+}
+
+.row-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}

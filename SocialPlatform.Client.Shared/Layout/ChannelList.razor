@@ -8,22 +8,13 @@
     <div id="content">
         @foreach (var channel in TopLevelChannels)
         {
-            <div class="channel" >
-                <img class="icon-small" src="@GetChannelIconUrl(channel)" alt="Channel Icon"/>
-                <span>@channel.Name</span>
+            @RenderChannel(channel)
+            <div class="sub-channels">
+                @foreach (var subChannel in channel.SubChannels)
+                {
+                    @RenderChannel(subChannel)
+                }
             </div>
-            @if (channel.SubChannels != null)
-            {
-                <div class="sub-channels">
-                    @foreach (var subChannel in channel.SubChannels)
-                    {
-                        <div class="channel">
-                            <img class="icon-small" src="@GetChannelIconUrl(subChannel)" alt="Channel Icon"/>
-                            <span>@subChannel.Name</span>
-                        </div>
-                    }
-                </div>
-            }
         }
     </div>
     <div id="voice-controls">
@@ -41,48 +32,105 @@
 </div>
 
 @code {
+    
+    private RenderFragment RenderChannel(Channel channel)
+    {
+        return
+            @<div class="channel">
+                <img class="icon-small" src="@GetChannelIconUrl(channel)" alt="Channel Icon"/>
+                <span>@channel.Name</span>
+            </div>;
+    }
+    
+    [Parameter]
+    public List<Data.ChannelData> Channels { get; set; }
+
+    private string? _selectedChannel { get; set; }= null;
 
     public class Channel
     {
         public enum ChannelType
         {
+            Custom,
             Text,
             Voice
         }
+        public string Id { get; set; } = String.Empty;
         public string Name { get; set; } = String.Empty;
         public ChannelType Type { get; set; } = ChannelType.Text;
-        public List<Channel>? SubChannels { get; set; } = null;
-        public bool Active { get; set; } = false;
+        public List<Channel> SubChannels { get; set; } = new();
     }
 
-    public List<Channel> TopLevelChannels { get; set; } = new List<Channel>
+    public List<Channel> TopLevelChannels { get; set; } = new();
+
+    protected override void OnParametersSet()
     {
-        new Channel
+        base.OnParametersSet();
+        RebuildChannelList();
+    }
+
+    private void RebuildChannelList()
+    {
+        TopLevelChannels.Clear();
+        Queue<Data.ChannelData> channelQueue = new();
+        // Step 1: Add all top level channels
+        foreach (var channel in Channels)
         {
-            Name = "General",
-            Type = Channel.ChannelType.Text,
-            Active = true
-        },
-        new Channel
-        {
-            Name = "Voice Channels",
-            Type = Channel.ChannelType.Voice,
-            SubChannels = new List<Channel>
+            if (channel.ParentId == null)
             {
-                new Channel
+                TopLevelChannels.Add(new Channel
                 {
-                    Name = "General",
-                    Type = Channel.ChannelType.Voice
-                },
-                new Channel
-                {
-                    Name = "AFK",
-                    Type = Channel.ChannelType.Voice
-                }
-            }
+                    Id = channel.Id,
+                    Name = channel.Name,
+                    Type = GetChannelType(channel.Type)
+                });
+            }else channelQueue.Enqueue(channel);
         }
-    };
+        
+        // Step 2: Add all sub channels
+        int initialQueueCount = channelQueue.Count;
+        int processedCount =0;
+        while (channelQueue.Count > 0 && processedCount < initialQueueCount*2)
+        {
+            var channel = channelQueue.Dequeue();
+            var parentChannel = TopLevelChannels.Find(c => c.Id == channel.ParentId);
+            if (parentChannel != null)
+            {
+                parentChannel.SubChannels.Add(new Channel
+                {
+                    Id = channel.Id,
+                    Name = channel.Name,
+                    Type = GetChannelType(channel.Type)
+                }); 
+            }
+            else
+            {
+                // If the parent channel is not found, add it to the queue to be processed later
+                channelQueue.Enqueue(channel);
+            }
+            
+            processedCount++;
+        }
+        if (channelQueue.Count > 0)
+        {
+            // If there are still channels in the queue, we have a circular reference or a missing parent channel
+            // This is a problem that should be handled
+            Console.WriteLine("Circular reference or invalid parent detected");
+            Console.WriteLine("Queue count: " + channelQueue.Count);
+            Console.WriteLine("Processed count: " + processedCount);
+        }
+    }
     
+    private Channel.ChannelType GetChannelType(string type)
+    {
+        return type switch
+        {
+            "Text" => Channel.ChannelType.Text,
+            "Voice" => Channel.ChannelType.Voice,
+            _ => Channel.ChannelType.Custom
+        };
+    }
+
     public string GetChannelIconUrl(Channel channel)
     {
         return channel.Type switch

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using SocialPlatform.Client.Shared.Services;
 
 namespace SocialPlatform.Client.Maui;
 
@@ -12,6 +13,7 @@ public static class MauiProgram
             .ConfigureFonts(fonts => { fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular"); });
 
         builder.Services.AddMauiBlazorWebView();
+        builder.Services.AddSingleton<ServerService>();
 
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();
