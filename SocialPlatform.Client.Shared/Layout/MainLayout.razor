@@ -41,11 +41,51 @@
 
         CurrentChannel = ServerService.Channels.FirstOrDefault();
         
-        LeftPanel = @<ChannelList Channels="ServerService.Channels"/>;
-        MiddlePanel = @<TextChannel Channel="(TextChannelData?)CurrentChannel"/>;
-        
-        
-        
+        LeftPanel = @<ChannelList Channels="ServerService.Channels" ChannelClicked="OnChannelClicked" SelectedChannelId="CurrentChannel?.Id"/>;
+        MiddlePanel = 
+            @<div style="height: 100%; width: 100%; margin: 0; padding: 0;">
+                @if (CurrentChannel is TextChannelData textData) 
+                {
+                    <TextChannel Channel="textData"/>
+                }
+              
+                @if (CurrentChannel is WhiteboardChannelData whiteboardData)
+                {
+                    <WhiteboardChannel Channel="whiteboardData"/> 
+                }
+           </div>;
+
+
+
     }
 
+    private void OnChannelClicked(string obj)
+    {
+        if (obj == CurrentChannel?.Id)
+        {
+            // Do nothing if the channel is already selected
+            return;
+        }
+        
+        var temp = ServerService.Channels.FirstOrDefault(x => x.Id == obj);
+        if (temp?.Type == TextChannelData.ChannelType)
+        {
+            // Access the text channel
+            CurrentChannel = temp;
+        }
+        else if (temp?.Type == VoiceChannelData.ChannelType)
+        {
+            // Do nothing
+        }
+        else if (temp?.Type == CategoryChannelData.ChannelType)
+        {
+            // Do nothing
+        }
+        else if (temp?.Type == WhiteboardChannelData.ChannelType)
+        {
+            // Access the whiteboard channel
+            CurrentChannel = temp;
+        }
+        StateHasChanged();
+    }
 }

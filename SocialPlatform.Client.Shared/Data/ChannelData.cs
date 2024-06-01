@@ -13,21 +13,29 @@ public class ChannelData
     
 public class TextChannelData : ChannelData
 {
-    const string ChannelTypeMessage = "Text";
+    public const string ChannelType = "Text";
     public List<MessageData> Messages { get; set; } = new();
-    public override string Type => ChannelTypeMessage;
+    public override string Type => ChannelType;
 }
 
 public class VoiceChannelData : ChannelData
 {
-    const string ChannelTypeVoice = "Voice";
+    public const string ChannelType = "Voice";
 
-    public override string Type => ChannelTypeVoice;
+    public override string Type => ChannelType;
 }
 
 public class CategoryChannelData : ChannelData
 {
-    const string ChannelTypeCategory = "Category";
+    public const string ChannelType = "Category";
 
-    public override string Type => ChannelTypeCategory;
+    public override string Type => ChannelType;
+}
+
+public class WhiteboardChannelData : ChannelData
+{
+    public const string ChannelType = "Whiteboard";
+    public List<MessageData> Messages { get; set; } = new();
+
+    public override string Type => ChannelType;
 }

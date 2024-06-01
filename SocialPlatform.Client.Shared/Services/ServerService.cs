@@ -62,6 +62,12 @@ public class ServerService
         };
         generalText.Messages.Add(new MessageData("1", "Test", DateTime.Now));
         
+        var whiteboard = new WhiteboardChannelData
+        {
+            Name = "Whiteboard",
+            Id = "200"
+        };
+        
         
         var category1 = new CategoryChannelData
         {
@@ -86,6 +92,7 @@ public class ServerService
         };
 
         serverData.Channels.Add(generalText);
+        serverData.Channels.Add(whiteboard);
         serverData.Channels.Add(category1);
         serverData.Channels.Add(voice1);
         serverData.Channels.Add(voice2);

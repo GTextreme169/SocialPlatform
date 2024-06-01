@@ -1,6 +1,6 @@
 ﻿@using SocialPlatform.Client.Shared.Data
 <div class="top-bar">
-    <TopBar Style="height: 100%;" Context="@(Channel?.Name ?? "Foo")" Description="@(Channel?.Description ?? "Bar")"/>
+    <TopBar Style="height: 100%;" Context="@Channel.Name" Description="@Channel.Description"/>
 </div>
 <div class="row-container">
     <VerticalLayout Style="min-width: 300px; width: 80%; overflow-y: clip; height: 100%;">
@@ -28,6 +28,5 @@
 </div>
 
 @code {
-     [Parameter]
-    public TextChannelData? Channel { get; set; }
+    [Parameter] public TextChannelData Channel { get; set; } = null!;
 }

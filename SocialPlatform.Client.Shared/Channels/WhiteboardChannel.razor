@@ -1,0 +1,132 @@
+﻿@using SocialPlatform.Client.Shared.Data
+@using System.Drawing
+@inject IJSRuntime JSRuntime
+
+<div class="whiteboard">
+    <div class="whiteboard__header">
+        <h2>@Channel.Name</h2>
+        <!-- Show Tool Bar -->
+        <div class="whiteboard__content__toolbar">
+            <!-- Color Picker -->
+            <input type="color" @bind="color" />
+            <!-- Brush Size -->
+            <input type="range" min="1" max="100" @bind="brushSize" />
+        </div>
+        
+    </div>
+    <div class="whiteboard__content"
+         @onmousedown="OnMouseDown"
+         @onmousemove="OnMouseMove"
+         @onmouseup="OnMouseUp"
+         @onmouseleave="OnMouseUp"
+         id="whiteboard-content">
+        <!-- Render all brush strokes on the whiteboard -->
+        @foreach (var message in Channel.Messages)
+        {
+            @RenderBrushStroke(message)
+        }
+        @if (isDrawing)
+        {
+            // Render the brush stroke that is currently being drawn
+            <div class="whiteboard__content__brush-stroke">
+                <svg width="100%" height="100%" style="position: absolute">
+                    <polyline points="@string.Join(" ", points.Select(x => $"{x.X},{x.Y}"))" style="fill:none;stroke:@color;stroke-width:@brushSize"/>
+                </svg>
+            </div>
+        }
+    </div>
+</div>
+
+<!--TODO: Move to a CSS file -->
+<style>
+    .whiteboard {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        border: 1px solid black;
+    }
+    
+    .whiteboard__header {
+        padding: 1rem;
+        border-bottom: 1px solid black;
+    }
+    
+    .whiteboard__content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 1rem;
+        position: relative;
+    }
+    
+    
+</style>
+
+@code {
+    [Parameter]
+    public WhiteboardChannelData Channel { get; set; }
+    
+    private string color = "#000000";
+    private int brushSize = 2;
+    
+    // Foreach Message in Channel.Messages add a brush stroke to the whiteboard
+    
+    private RenderFragment RenderBrushStroke(MessageData message)
+    {
+        // Content is a string that is either: MD, HTML, or SVG
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "whiteboard__content__brush-stroke");
+            builder.AddMarkupContent(2, message.Content);
+            builder.CloseElement();
+        };
+    }
+
+    // User is drawing on the whiteboard
+    bool isDrawing  = false;
+    List<Point> points = new List<Point>();
+    
+    
+    private void OnMouseDown(MouseEventArgs obj)
+    {
+        Console.WriteLine("Mouse Down");
+        isDrawing = true;
+    }
+    
+    private void OnMouseMove(MouseEventArgs obj)
+    {
+        if (isDrawing)
+        {
+            Console.WriteLine("Mouse Move");
+            
+            // Add the touch position to the points list
+            points.Add(new Point((int)obj.OffsetX, (int)obj.OffsetY));
+            StateHasChanged();
+        }
+    }
+    
+    private void OnMouseUp(MouseEventArgs obj)
+    {
+        Console.WriteLine("Mouse Up");
+        isDrawing = false;
+        BuildBrushStroke();
+    }
+    
+    void BuildBrushStroke()
+    {
+        // Create a brush stroke message
+        var brushStroke = new MessageData()
+        {
+            Content = $"<svg width='100%' height='100%' style='position:absolute'><polyline points='{string.Join(" ", points.Select(x=> $"{x.X},{x.Y}"))}' style='fill:none;stroke:{color};stroke-width:{brushSize}' /></svg>"
+        };
+        
+        // Add the brush stroke to the channel
+        Channel.Messages.Add(brushStroke);
+        
+        // Clear the points list
+        points.Clear();
+    }
+}

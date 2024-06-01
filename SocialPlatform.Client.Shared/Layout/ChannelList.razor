@@ -36,7 +36,7 @@
     private RenderFragment RenderChannel(Channel channel)
     {
         return
-            @<div class="channel">
+            @<div class="channel @(SelectedChannelId == channel.Id ? "active":"")" @onclick="() => GoToChannel(channel)">
                 <img class="icon-small" src="@GetChannelIconUrl(channel)" alt="Channel Icon"/>
                 <span>@channel.Name</span>
             </div>;
@@ -44,8 +44,13 @@
     
     [Parameter]
     public List<Data.ChannelData> Channels { get; set; }
+    
+    [Parameter]
+    public EventCallback<string> ChannelClicked { get; set; } = EventCallback<string>.Empty;
+    
+    [Parameter]
+    public string? SelectedChannelId { get; set; }
 
-    private string? _selectedChannel { get; set; }= null;
 
     public class Channel
     {
@@ -63,6 +68,11 @@
 
     public List<Channel> TopLevelChannels { get; set; } = new();
 
+    private void GoToChannel(Channel channel)
+    {
+        ChannelClicked.InvokeAsync(channel.Id);
+    }
+    
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
